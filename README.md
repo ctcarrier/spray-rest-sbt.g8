@@ -1,20 +1,20 @@
-# Scalatra project
+# Spray/Akka/MongoDB/SBT10 project
 
-[g8](http://github.com/n8han/giter8) template to get a Scalatra web service up and running quickly. The template generates a project that uses SBT 0.11.x. The project will build under SBT 0.10.x with minor changes. The project will not build under 0.7.x versions of SBT.
+[g8](http://github.com/n8han/giter8) This is a bare bones REST template implemented using the [Spray](http://spray.cc) framework on top of Akka.  Persistence is handled with [MongoDB](http://mongodb.com).
 
 ## Usage
 
 Install giter8 (g8) - [readme](http://github.com/n8han/giter8#readme) for more information.
 
-Install SBT 0.11.x - [Setup](https://github.com/harrah/xsbt/wiki/Setup) for more information.
+Install SBT 0.10.x - [Setup](https://github.com/harrah/xsbt/wiki/Setup) for more information.
 
 In a shell, run the following:
 
-    g8 scalatra/scalatra-sbt
+    g8 ctcarrier/spray-rest-sbt10.g8
     cd <name-of-app>
     sbt
     > update
     > jetty-run
     
-You should be able to browse to a [test resource](http://localhost:8080/)
+You should be able to browse to a access a JSON body for your resource with 'curl -vv localhost:8080/$resourceName$'
 

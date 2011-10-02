@@ -17,7 +17,7 @@ import com.mongodb.casbah.{MongoDB, MongoConnection}
 import cc.spray.{HttpService, RootService}
 
 /**
- * @author lakshmigopalan
+ * @author chris_carrier
  */
 
 
