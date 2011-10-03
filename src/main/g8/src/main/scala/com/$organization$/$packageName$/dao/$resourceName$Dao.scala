@@ -28,9 +28,9 @@ import com.$organization$.$packageName$.model._
  * // TODO need a better way to have this as a singleton "object" and use db as an implicit val.
  */
 
-class $resourceName$DAO(mongoCollection: MongoCollection) extends Dao {
+class $resourceName$Dao(mongoCollection: MongoCollection) extends Dao {
 
-  def get(key: ObjectId) = {
+  def get$resourceName$(key: ObjectId) = {
     Future {
       val q = MongoDBObject("_id" -> key)
       val dbo = mongoCollection.findOne(q)
@@ -38,7 +38,7 @@ class $resourceName$DAO(mongoCollection: MongoCollection) extends Dao {
     }
   }
 
-  def post(modelWrapper: $resourceName$Wrapper) = {
+  def create$resourceName$(modelWrapper: $resourceName$Wrapper) = {
     Future {
       val dbo = grater[modelWrapper].asDBObject(modelWrapper)
       mongoCollection += dbo
@@ -46,7 +46,7 @@ class $resourceName$DAO(mongoCollection: MongoCollection) extends Dao {
     }
   }
 
-  def put(key: ObjectId, model: $resourceName$) = {
+  def update$resourceName$(key: ObjectId, model: $resourceName$) = {
     Future {
       val query = MongoDBObject("_id" -> key)
       val update = $addToSet("content" -> model)
@@ -58,7 +58,7 @@ class $resourceName$DAO(mongoCollection: MongoCollection) extends Dao {
     }
   }
 
-  def search(searchObj: MongoDBObject) = {
+  def search$resourceName$(searchObj: MongoDBObject) = {
     Future {
       val data = modelCollection.find(searchObj)
       val dataList = data.map(f => grater[modelWrapper].asObject(f).content).flatten.toList
