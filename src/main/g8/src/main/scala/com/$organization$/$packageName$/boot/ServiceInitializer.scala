@@ -15,6 +15,8 @@ import cc.spray.HttpService._
 import com.mongodb.ServerAddress
 import com.mongodb.casbah.{MongoDB, MongoConnection}
 import cc.spray.{HttpService, RootService}
+import com.$organization$.$packageName$._
+import com.$organization$.$packageName$.dao._
 
 /**
  * @author chris_carrier

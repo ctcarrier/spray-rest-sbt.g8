@@ -9,19 +9,18 @@ import net.liftweb.json.Serialization._
 import org.bson.types.ObjectId
 import akka.event.EventHandler
 import com.recursivity.commons.validator.{NotNullOrNone, ValidationGroup, ClasspathMessageResolver}
-import service.$resourceName$Service
 import cc.spray.http._
 import HttpHeaders._
 import HttpMethods._
 import StatusCodes._
 import MediaTypes._
-import com.$organization$.$packageName$.model
+import com.$organization$.$packageName$.model._
 
 /**
  * @author chris carrier
  */
 
-trait $resourceName$EndPoint extends Directives {
+trait $resourceName$Endpoint extends Directives {
   implicit val formats = DefaultFormats
 
   final val NOT_FOUND_MESSAGE = "resource.notFound"
@@ -60,7 +59,7 @@ trait $resourceName$EndPoint extends Directives {
       // Service implementation.
       pathPrefix("partners" / LongNumber / "customers" / LongNumber / "resources") {
         (partnerId, customerId) =>
-          path("^[a-f0-9]+$".r) {
+          path("^[a-f0-9]+\$".r) {
             configId =>
               get {
                 ctx =>

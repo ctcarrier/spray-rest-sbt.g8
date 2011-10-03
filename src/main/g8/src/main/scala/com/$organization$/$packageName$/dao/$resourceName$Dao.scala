@@ -1,4 +1,4 @@
-package com.$organization$.$resourceName$.dao
+package com.$organization$.$packageName$.dao
 
 import _root_.akka.dispatch.Future._
 import akka.dispatch.Future._

@@ -6,6 +6,7 @@ import org.bson.types.ObjectId
 import com.mongodb.casbah.commons.MongoDBObject
 import org.bson.types.ObjectId
 import com.mongodb.casbah.commons.MongoDBObject
+import com.$organization$.$packageName$.model._
 
 trait Dao {
   def get$resourceName$(key: ObjectId): Future[Option[$resourceName$Wrapper]]
