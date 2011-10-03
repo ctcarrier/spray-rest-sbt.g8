@@ -1,4 +1,4 @@
-package com.$organization$.$resourceName$
+package com.$organization$.$packageName$
 
 import _root_.akka.dispatch.Future
 import akka.dispatch.Future

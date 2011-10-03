@@ -21,7 +21,7 @@ import com.mongodb.casbah.commons.MongoDBObject._
 import com.novus.salat._
 import com.mongodb.casbah.query.SetOp._
 import com.mongodb.casbah.commons.MongoDBObject
-import com.$organization$.$resourceName$.model._
+import com.$organization$.$packageName$.model._
 
 /**
  * @author chris carrier

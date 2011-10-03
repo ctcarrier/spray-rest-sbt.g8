@@ -6,7 +6,7 @@
 <web-app>
 
     <listener>
-        <listener-class>com.$organization$.$resourceName$.boot.ServiceInitializer</listener-class>
+        <listener-class>com.$organization$.$packageName$.boot.ServiceInitializer</listener-class>
     </listener>
 
     <servlet>

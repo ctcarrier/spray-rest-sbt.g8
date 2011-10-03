@@ -1,4 +1,4 @@
-package com.$organization$.$resourceName$.model
+package com.$organization$.$packageName$.model
 
 /**
  * @author chris_carrier

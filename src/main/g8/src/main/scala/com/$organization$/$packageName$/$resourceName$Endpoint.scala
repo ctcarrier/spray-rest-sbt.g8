@@ -1,4 +1,4 @@
-package com.$organization$.$resourceName$
+package com.$organization$.$packageName$
 
 import cc.spray.Directives
 import model.{$resourceName$SearchParams, $resourceName$Wrapper, $resourceName$}
@@ -15,7 +15,7 @@ import HttpHeaders._
 import HttpMethods._
 import StatusCodes._
 import MediaTypes._
-import com.$organization$.$resourceName$.model._
+import com.$organization$.$packageName$.model
 
 /**
  * @author chris carrier

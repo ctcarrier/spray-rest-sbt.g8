@@ -1,4 +1,4 @@
-package com.zub.ss.prototype.model
+package com.$organization$.$packageName$.model
 
 import com.mongodb.casbah.Imports._
 

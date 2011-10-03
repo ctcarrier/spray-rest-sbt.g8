@@ -1,4 +1,4 @@
-package com.$organization$.$resourceName$.boot
+package com.$organization$.$packageName$.boot
 
 import org.slf4j.LoggerFactory
 import akka.dispatch._

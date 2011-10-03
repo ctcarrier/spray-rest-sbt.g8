@@ -1,4 +1,4 @@
-package com.$organization$.$resourceName$.model
+package com.$organization$.$packageName$.model
 
 import com.novus.salat.annotations.raw.Ignore
 import com.novus.salat.annotations.raw.Salat
