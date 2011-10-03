@@ -49,7 +49,7 @@ class $resourceName$Dao(mongoCollection: MongoCollection) extends Dao {
   def update$resourceName$(key: ObjectId, model: $resourceName$) = {
     Future {
       val query = MongoDBObject("_id" -> key)
-      val update = $addToSet("content" -> model)
+      val update = \$addToSet("content" -> model)
 
       modelCollection.update(query, update, false, false, WriteConcern.Safe)
 
