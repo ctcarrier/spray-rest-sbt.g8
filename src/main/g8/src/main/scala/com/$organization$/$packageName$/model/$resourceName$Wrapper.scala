@@ -9,4 +9,4 @@ import org.bson.types.ObjectId
 
 case class $resourceName$Wrapper(_id: Option[ObjectId],
                                        version: Long,
-                                       content: List[Immutable$resourceName$])
+                                       content: List[$resourceName$])

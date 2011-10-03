@@ -33,8 +33,6 @@ trait $resourceName$Endpoint extends Directives {
   val service: Dao
 
   def validateRequestBody(requestBody: String): List[(String, String)] = {
-    EventHandler.info(this, "Class= " + this.getClass)
-    EventHandler.info(this, "EnclosingClass= " + this.getClass.getEnclosingClass)
     val group = ValidationGroup(new ClasspathMessageResolver(this.getClass.getEnclosingClass))
     val json = parse(requestBody)
 
@@ -58,14 +56,13 @@ trait $resourceName$Endpoint extends Directives {
       }
     } ~
       // Service implementation.
-      pathPrefix("partners" / LongNumber / "customers" / LongNumber / "resources") {
-        (partnerId, customerId) =>
+      pathPrefix("resources") {
           path("^[a-f0-9]+\$".r) {
-            configId =>
+            resourceId =>
               get {
                 ctx =>
                   try {
-                    configService.get(new ObjectId(configId)).onComplete(f => {
+                    service.get$resourceName$(new ObjectId(resourceId)).onComplete(f => {
                       f.result.get match {
                         case Some($resourceName$Wrapper(oid, version, content)) => ctx.complete(write(SuccessResponse[$resourceName$](version, ctx.request.path, 1, None, content.map(x => x.copy(id = oid)))))
                         case None => ctx.fail(StatusCodes.NotFound, write(ErrorResponse(1l, ctx.request.path, List(NOT_FOUND_MESSAGE))))
@@ -88,9 +85,9 @@ trait $resourceName$Endpoint extends Directives {
                       ctx.fail(StatusCodes.NotFound, write(ErrorResponse(1, ctx.request.path, failures.map(xs => xs._2))))
                     }
                     else {
-                      val config = parse(content).extract[$resourceName$]
+                      val resource = parse(content).extract[$resourceName$]
 
-                      configService.put(new ObjectId(configId), customerId, partnerId, config).onTimeout(f => {
+                      service.update$resourceName$(new ObjectId(resourceId), customerId, partnerId, resource).onTimeout(f => {
                         ctx.fail(StatusCodes.InternalServerError, write(ErrorResponse(1, ctx.request.path, List(INTERNAL_ERROR_MESSAGE))))
                       }).onComplete(f => {
                         f.result.get match {
@@ -121,10 +118,10 @@ trait $resourceName$Endpoint extends Directives {
                     ctx.fail(StatusCodes.BadRequest, write(ErrorResponse(1, ctx.request.path, failures.map(xs => xs._2))))
                   }
                   else {
-                    val config = parse(content).extract[$resourceName$]
-                    val configWrapper = $resourceName$Wrapper(None, customerId, partnerId, 1, List(config))
+                    val resource = parse(content).extract[$resourceName$]
+                    val resourceWrapper = $resourceName$Wrapper(None, customerId, partnerId, 1, List(resource))
 
-                    configService.post(configWrapper).onTimeout(f => {
+                    service.create$resourceName$(resourceWrapper).onTimeout(f => {
                       ctx.fail(StatusCodes.InternalServerError, write(ErrorResponse(1, ctx.request.path, List(INTERNAL_ERROR_MESSAGE))))
                       EventHandler.info(this, "Timed out")
                     }).onComplete(f => {
@@ -143,7 +140,7 @@ trait $resourceName$Endpoint extends Directives {
               parameters('name?, 'description?) { (name, description) =>
                 get { ctx =>
 
-                  configService.search($resourceName$SearchParams(name, description)).onTimeout(f => {
+                  service.search$resourceName$($resourceName$SearchParams(name, description)).onTimeout(f => {
                     ctx.fail(StatusCodes.InternalServerError, write(ErrorResponse(1, ctx.request.path, List(INTERNAL_ERROR_MESSAGE))))
                             }).onComplete(f => {
                               f.result.get match {

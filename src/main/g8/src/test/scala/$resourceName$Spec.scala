@@ -28,7 +28,7 @@ import MediaTypes._
 
 
 class $resourceName$Spec extends Specification {
-  implicit val formats = DefaultFormats 
+  implicit val formats = DefaultFormats
 
   final val PARTNER_ID = 123
   final val CUSTOMER_ID = 2
