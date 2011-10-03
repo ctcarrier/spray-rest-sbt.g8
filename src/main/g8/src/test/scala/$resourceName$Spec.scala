@@ -1,7 +1,7 @@
-package com.$organization$.$resourceName$
+package com.$organization$.$packageName$
 
-import dao.$resourceName$DAO
-import model.{$resourceName$Wrapper, NestedObject, $resourceName$}
+import dao._
+import model._
 import org.specs2.Specification
 import org.specs2.specification._
 import com.mongodb.casbah.MongoConnection._
@@ -49,10 +49,10 @@ class $resourceName$Spec extends Specification {
   //val dbo = grater[NestedObject].asDBObject(NestedObject(1, 2))
 
   configDb.insert(dbo, WriteConcern.Safe)
-  val resourceId = dbo.get("_id").toString
+  val test$resourceName$Id = dbo.get("_id").toString
 
   def is = args(traceFilter=includeTrace("com.zub*"))                                   ^
-    String.format("The direct GET %s/%s API should", BASE_URL, resourceId)                      ^
+    String.format("The direct GET %s/%s API should", BASE_URL, test$resourceName$Id)                      ^
       "return HTTP status 200 with a response body from: " + BASE_URL ! as().getTest()       ^
       "and return 404 for a non-existent resource" ! as().getNotFound()                ^
       "and return 404 for an illegal ID" ! as().getBadObjectId()                      ^
@@ -68,16 +68,16 @@ class $resourceName$Spec extends Specification {
     String.format("The invalid POST %s API should", BASE_URL)                                         ^
       "return HTTP status 400 with an error message if required field is missing" ! as().postTestFail() ^
                                                                                   p^
-    String.format("The PUT %s/%s API should", BASE_URL, resourceId)^
+    String.format("The PUT %s/%s API should", BASE_URL, test$resourceName$Id)^
     "return HTTP status 200 with a response body" ! as().putSuccess() ^
   Step {
     configDb.remove(MongoDBObject("_id" -> test$resourceName$Id))
   }       ^
                                                                                   end
 
-  case class as() extends SprayTest with $resourceName$EndPoint with ThrownExpectations {
+  case class as() extends SprayTest with $resourceName$Endpoint with ThrownExpectations {
 
-    val configService = new $resourceName$DAO(configDb)
+    val service = new $resourceName$Dao(configDb)
 
     def getTest() = {
       val response = testService(HttpRequest(GET, BASE_URL + "/" + test$resourceName$Id)) {

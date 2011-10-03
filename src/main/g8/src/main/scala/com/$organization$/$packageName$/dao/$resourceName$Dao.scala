@@ -8,11 +8,9 @@ import com.novus.salat.global._
 import com.mongodb.ServerAddress
 import com.mongodb.DBObject
 import com.mongodb.{ServerAddress, DBObject}
-import com.mongodb.casbah.MongoConnection._
 import com.mongodb.casbah.{MongoDB, MongoConnection}
-import com.novus.salat._
 import com.mongodb.casbah.commons.MongoDBObject
-import com.mongodb.casbah.commons.MongoDBObject
+import com.$organization$.$packageName$._
 import com.$organization$.$packageName$.model._
 
 /**

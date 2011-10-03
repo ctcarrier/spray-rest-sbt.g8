@@ -87,7 +87,7 @@ trait $resourceName$Endpoint extends Directives {
                     else {
                       val resource = parse(content).extract[$resourceName$]
 
-                      service.update$resourceName$(new ObjectId(resourceId), customerId, partnerId, resource).onTimeout(f => {
+                      service.update$resourceName$(new ObjectId(resourceId), resource).onTimeout(f => {
                         ctx.fail(StatusCodes.InternalServerError, write(ErrorResponse(1, ctx.request.path, List(INTERNAL_ERROR_MESSAGE))))
                       }).onComplete(f => {
                         f.result.get match {
@@ -119,7 +119,7 @@ trait $resourceName$Endpoint extends Directives {
                   }
                   else {
                     val resource = parse(content).extract[$resourceName$]
-                    val resourceWrapper = $resourceName$Wrapper(None, customerId, partnerId, 1, List(resource))
+                    val resourceWrapper = $resourceName$Wrapper(None, 1, List(resource))
 
                     service.create$resourceName$(resourceWrapper).onTimeout(f => {
                       ctx.fail(StatusCodes.InternalServerError, write(ErrorResponse(1, ctx.request.path, List(INTERNAL_ERROR_MESSAGE))))

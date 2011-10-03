@@ -42,7 +42,7 @@ class ServiceInitializer extends Initializer {
 
   // ///////////// INDEXES for collections go here (include all lookup fields)
   //  configsCollection.ensureIndex(MongoDBObject("customerId" -> 1), "idx_customerId")
-  val mainModule = new $resourceName$EndPoint {
+  val mainModule = new $resourceName$Endpoint {
     val service = new $resourceName$Dao(db(collection))
   }
 
