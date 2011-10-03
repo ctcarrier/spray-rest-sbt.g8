@@ -15,6 +15,7 @@ import HttpMethods._
 import StatusCodes._
 import MediaTypes._
 import com.$organization$.$packageName$.model._
+import com.$organization$.$packageName$.response._
 
 /**
  * @author chris carrier
