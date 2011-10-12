@@ -16,13 +16,15 @@ import StatusCodes._
 import MediaTypes._
 import com.$organization$.$packageName$.model._
 import com.$organization$.$packageName$.response._
+import util._
+import com.$organization$.$packageName$.directives._
 
 /**
  * @author chris carrier
  */
 
-trait $resourceName$Endpoint extends Directives {
-  implicit val formats = DefaultFormats
+trait $resourceName$Endpoint extends Directives with ValidationDirectives {
+  implicit val formats = DefaultFormats + new ObjectIdSerializer
 
   final val NOT_FOUND_MESSAGE = "resource.notFound"
   final val INTERNAL_ERROR_MESSAGE = "error"
@@ -32,22 +34,6 @@ trait $resourceName$Endpoint extends Directives {
   EventHandler.info(this, "Starting actor.")
   val service: Dao
 
-  def validateRequestBody(requestBody: String): List[(String, String)] = {
-    val group = ValidationGroup(new ClasspathMessageResolver(this.getClass.getEnclosingClass))
-    val json = parse(requestBody)
-
-    List(("name"), ("description")).map {
-      xs =>
-        NotNullOrNone[Option[String]](xs, {
-          (json \ xs).extractOpt[String]
-        })
-    }.foreach {
-      xs => group.add(xs)
-    }
-
-    group.validateAndReturnErrorMessages
-  }
-
   val restService = {
     // Debugging: /ping -> pong
     path("ping") {
@@ -56,7 +42,7 @@ trait $resourceName$Endpoint extends Directives {
       }
     } ~
       // Service implementation.
-      pathPrefix("resources") {
+      pathPrefix("$resourceName$s") {
           path("^[a-f0-9]+\$".r) {
             resourceId =>
               get {
@@ -75,16 +61,12 @@ trait $resourceName$Endpoint extends Directives {
                     }
                   }
               } ~
+              requiringStrings(List("name", "description")) {
               put {
                 ctx =>
                   try {
                     val content = new String(ctx.request.content.get.buffer)
 
-                    val failures = validateRequestBody(content)
-                    if (!failures.isEmpty) {
-                      ctx.fail(StatusCodes.NotFound, write(ErrorResponse(1, ctx.request.path, failures.map(xs => xs._2))))
-                    }
-                    else {
                       val resource = parse(content).extract[$resourceName$]
 
                       service.update$resourceName$(new ObjectId(resourceId), resource).onTimeout(f => {
@@ -99,7 +81,7 @@ trait $resourceName$Endpoint extends Directives {
                           ctx.fail(StatusCodes.InternalServerError, write(ErrorResponse(1, ctx.request.path, List(e.getMessage))))
                         }
                       }
-                    }
+
                   }
                   catch {
                     case e: IllegalArgumentException => {
@@ -107,17 +89,14 @@ trait $resourceName$Endpoint extends Directives {
                     }
                   }
               }
+              }
           } ~
             path("") {
+              requiringStrings(List("name", "description")) {
               post {
                 ctx =>
                   val content = new String(ctx.request.content.get.buffer)
 
-                  val failures = validateRequestBody(content)
-                  if (!failures.isEmpty) {
-                    ctx.fail(StatusCodes.BadRequest, write(ErrorResponse(1, ctx.request.path, failures.map(xs => xs._2))))
-                  }
-                  else {
                     val resource = parse(content).extract[$resourceName$]
                     val resourceWrapper = $resourceName$Wrapper(None, 1, List(resource))
 
@@ -135,7 +114,7 @@ trait $resourceName$Endpoint extends Directives {
                         ctx.fail(StatusCodes.InternalServerError, write(ErrorResponse(1, ctx.request.path, List(e.getMessage))))
                       }
                     }
-                  }
+              }
               } ~
               parameters('name?, 'description?) { (name, description) =>
                 get { ctx =>

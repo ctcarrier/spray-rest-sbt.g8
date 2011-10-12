@@ -34,7 +34,6 @@ libraryDependencies ++= Seq(
   //CASBAH
   "com.mongodb.casbah" % "casbah_2.9.0-1" % "2.1.5.0",
   "com.novus" % "salat-core_2.9.0-1" % "0.0.8-SNAPSHOT",
-  "com.zub" %% "rest-scala" % "1.0-SNAPSHOT",
   //TESTING
   "org.specs2" %% "specs2" % "1.5" % "test",
   "org.specs2" % "specs2-scalaz-core_2.9.0-1" % "6.0.RC2" % "test",
@@ -42,9 +41,8 @@ libraryDependencies ++= Seq(
   "org.mortbay.jetty" % "servlet-api" % "3.0.20100224" % "provided",
   "org.eclipse.jetty" % "jetty-server" % "8.0.0.M3" % "jetty, compile",
   "org.eclipse.jetty" % "jetty-util" % "8.0.0.M3" % "jetty, compile",
-  "org.eclipse.jetty" % "jetty-webapp" % "8.0.0.M3" % "jetty, compile",
-  "com.recursivity" % "recursivity-commons_2.9.0-1" % "0.5.3"
-)
+  "org.eclipse.jetty" % "jetty-webapp" % "8.0.0.M3" % "jetty, compile"
+  )
 
 resolvers ++= Seq(
   ScalaToolsSnapshots,
@@ -56,7 +54,5 @@ resolvers ++= Seq(
   "repo.novus rels" at "http://repo.novus.com/releases/",
   "repo.novus snaps" at "http://repo.novus.com/snapshots/",
   "Twitter4j repo" at "http://twitter4j.org/maven2",
-  "Zuberance releases" at "http://tools.zubops.net:8081/nexus/content/repositories/releases",
-  "Zuberance snapshots" at "http://tools.zubops.net:8081/nexus/content/repositories/snapshots",
   "Local Maven Repository" at "file://"+Path.userHome+"/.m2/repository"
 )

@@ -32,10 +32,10 @@ class $resourceName$Spec extends Specification {
 
   final val PARTNER_ID = 123
   final val CUSTOMER_ID = 2
-  val BASE_URL = "resources"
+  val BASE_URL = "/$resourceName$s"
 
   val db = MongoConnection("localhost",27017)("test")
-  val configDb = db("resource_test")
+  val configDb = db("$packageName$_test")
   val testObj = $resourceName$(None, "name", "description", Some(NestedObject(1, 2)), true)
   val testObj2 = $resourceName$(None, "name2", "description2", Some(NestedObject(1, 2)), true)
   val testObjString = net.liftweb.json.Serialization.write(testObj)
