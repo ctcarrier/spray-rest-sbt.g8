@@ -51,7 +51,7 @@ class $resourceName$Spec extends Specification {
   configDb.insert(dbo, WriteConcern.Safe)
   val test$resourceName$Id = dbo.get("_id").toString
 
-  def is = args(traceFilter=includeTrace("com.zub*"))                                   ^
+  def is = args(traceFilter=includeTrace("com.$organizationName$*"))                                   ^
     String.format("The direct GET %s/%s API should", BASE_URL, test$resourceName$Id)                      ^
       "return HTTP status 200 with a response body from: " + BASE_URL ! as().getTest()       ^
       "and return 404 for a non-existent resource" ! as().getNotFound()                ^

@@ -18,13 +18,13 @@ import cc.spray.connectors.Servlet30ConnectorServlet
 import java.util.Calendar
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.nio.SelectChannelConnector
+import akka.event.slf4j.Logging
 
-object Run {
+object Run extends Logging {
 	val GMT_TIMEZONE: String = "Greenwich Mean Time"
-  val logger = LoggerFactory.getLogger("com.zub.ss.core.Run");
 
 	def main(args: Array[String]): Unit = {
-    logger.info("Starting campaign service.")
+    log.info("Starting campaign service.")
 
 		var env: String = System.getProperty("akka.mode")
 		if (env == null) {
@@ -32,8 +32,8 @@ object Run {
 		}
 		val timeZone: String = Calendar.getInstance().getTimeZone().getDisplayName()
 		if (!(env.equals("dev") || env.equals("test")) && !timeZone.equals(GMT_TIMEZONE)){
-		    logger.error(String.format("System clock is set to non-GMT timezone (%s). This may cause data integrity issues.", timeZone))
-		    logger.error("Exiting the Campaign Service")
+		    log.error(String.format("System clock is set to non-GMT timezone (%s). This may cause data integrity issues.", timeZone))
+		    log.error("Exiting the Campaign Service")
       throw new RuntimeException("Must set environment (Example: java -Dakka.mode=dev -jar ...)")
 		}
 
