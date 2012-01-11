@@ -129,8 +129,7 @@ class $resourceName$Spec extends Specification {
           restService
         }.response
 
-      response.content.as[String] mustEqual("sflksdlk")
-      //response.status must be equalTo 400
+      response.status must be equalTo 400
     }
 
     def putSuccess() = {
