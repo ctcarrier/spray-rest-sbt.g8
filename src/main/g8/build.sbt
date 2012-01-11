@@ -21,7 +21,7 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "0.9.28" % "runtime",
   "ch.qos.logback" % "logback-core" % "0.9.28" % "runtime",
   //SPRAY
-  "cc.spray" %% "spray-http" % "0.8.0" % "compile" withSources(),
+  "cc.spray" %% "spray-base" % "0.8.0" % "compile" withSources(),
   "cc.spray" %% "spray-server" % "0.8.0" % "compile" withSources(),
   //AKKA
   "se.scalablesolutions.akka" % "akka-actor" % "1.3-RC6",
