@@ -1,4 +1,4 @@
-# Spray/Akka/MongoDB/SBT10 project
+# Spray/Akka/MongoDB/SBT11 project
 
 [g8](http://github.com/n8han/giter8) This is a bare bones REST template implemented using the [Spray](http://spray.cc) framework on top of Akka.  Persistence is handled with [MongoDB](http://mongodb.com).
 
@@ -6,7 +6,9 @@
 
 Install giter8 (g8) - [readme](http://github.com/n8han/giter8#readme) for more information.
 
-Install SBT 0.10.x - [Setup](https://github.com/harrah/xsbt/wiki/Setup) for more information.
+Install SBT 0.11.X - [Setup](https://github.com/harrah/xsbt/wiki/Setup) for more information.
+
+Install MongoDB - [Setup](http://www.mongodb.org) for more information.
 
 In a shell, run the following:
 

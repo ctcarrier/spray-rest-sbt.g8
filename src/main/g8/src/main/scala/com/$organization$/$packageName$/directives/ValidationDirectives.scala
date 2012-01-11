@@ -9,7 +9,7 @@ import cc.spray.directives._
 import cc.spray.{ValidationRejection, Reject, Pass, Directives}
 import cc.spray
 import net.liftweb.json.JsonParser._
-import net.liftweb.json.DefaultFormats
+import net.liftweb.json.Formats
 import com.$organization$.$packageName$.util.ObjectIdSerializer
 import net.liftweb.json.Serialization._
 import com.$organization$.$packageName$.response.ErrorResponse._

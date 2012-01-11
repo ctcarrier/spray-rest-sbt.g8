@@ -8,7 +8,6 @@ import net.liftweb.json.DefaultFormats
 import net.liftweb.json.Serialization._
 import org.bson.types.ObjectId
 import akka.event.EventHandler
-import com.recursivity.commons.validator.{NotNullOrNone, ValidationGroup, ClasspathMessageResolver}
 import cc.spray.http._
 import HttpHeaders._
 import HttpMethods._
