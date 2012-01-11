@@ -1,11 +1,10 @@
 package com.$organization$.$packageName$.directives
 
-import _root_.cc.spray.directives.BasicDirectives._
-import _root_.cc.spray.directives.SprayRoute0
-import _root_.cc.spray.Pass._
-import _root_.cc.spray.Reject._
-import _root_.cc.spray.ValidationRejection._
-import _root_.net.liftweb.json.JsonParser._
+import cc.spray.directives.SprayRoute0
+import cc.spray.Pass._
+import cc.spray.Reject._
+import cc.spray.ValidationRejection._
+import net.liftweb.json.JsonParser._
 import cc.spray.directives._
 import cc.spray.{ValidationRejection, Reject, Pass, Directives}
 import cc.spray
@@ -23,6 +22,8 @@ import com.$organization$.$packageName$.response.ErrorResponse
 
 
 trait ValidationDirectives extends Directives {
+
+  implicit val formats: Formats
 
   def requiringStrings(fieldNames: List[String]): SprayRoute0 = filter {
     ctx =>
