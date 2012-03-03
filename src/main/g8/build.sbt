@@ -1,3 +1,5 @@
+import AssemblyKeys._
+
 organization := "$organization$"
 
 name := "$name$"
@@ -6,7 +8,14 @@ version := "$version$"
 
 scalaVersion := "$scala_version$"
 
-seq(webSettings :_*)
+seq(assemblySettings: _*)
+
+seq(Revolver.settings: _*)
+
+javaOptions in Revolver.RE += "-Dakka.mode=dev"
+
+unmanagedResourceDirectories in Compile <+=
+    (baseDirectory) { _ / "src" / "main" / "webapp" }
 
 ivyXML :=
  	        <dependencies>
@@ -15,19 +24,20 @@ ivyXML :=
  	        </dependencies>
 
 libraryDependencies ++= Seq(
-  //LOGGING
+//LOGGING
   "org.slf4j" % "jcl-over-slf4j" % "1.6.1",
   "org.slf4j" % "slf4j-api" % "1.6.1",
   "ch.qos.logback" % "logback-classic" % "0.9.28" % "runtime",
   "ch.qos.logback" % "logback-core" % "0.9.28" % "runtime",
   //SPRAY
-  "cc.spray" % "spray-base" % "0.8.0" % "compile" withSources(),
-  "cc.spray" % "spray-server" % "0.8.0" % "compile" withSources(),
+  "cc.spray" % "spray-base" % "0.9.0-RC4" % "compile" withSources(),
+  "cc.spray" % "spray-server" % "0.9.0-RC4" % "compile" withSources(),
+  "cc.spray" % "spray-can" % "0.9.2" % "compile" withSources(),
   //AKKA
-  "se.scalablesolutions.akka" % "akka-actor" % "1.3-RC6",
-  "se.scalablesolutions.akka" % "akka-http" % "1.3-RC6",
-  "se.scalablesolutions.akka" % "akka-testkit" % "1.3-RC6",
-  "se.scalablesolutions.akka" % "akka-slf4j" % "1.3-RC6",
+  "se.scalablesolutions.akka" % "akka-actor" % "1.3.1",
+  "se.scalablesolutions.akka" % "akka-http" % "1.3.1",
+  "se.scalablesolutions.akka" % "akka-testkit" % "1.3.1",
+  "se.scalablesolutions.akka" % "akka-slf4j" % "1.3.1",
   //LIFT-JSON
   "net.liftweb" % "lift-json-ext_2.9.0-1" % "2.4-M2",
   "net.liftweb" % "lift-json_2.9.0-1" % "2.4-M2",
@@ -37,11 +47,8 @@ libraryDependencies ++= Seq(
   //TESTING
   "org.specs2" %% "specs2" % "1.5" % "test",
   "org.specs2" % "specs2-scalaz-core_2.9.0-1" % "6.0.RC2" % "test",
-  //Jetty
-  "org.mortbay.jetty" % "servlet-api" % "3.0.20100224" % "provided",
-  "org.eclipse.jetty" % "jetty-server" % "8.0.0.M3" % "jetty, compile",
-  "org.eclipse.jetty" % "jetty-util" % "8.0.0.M3" % "jetty, compile",
-  "org.eclipse.jetty" % "jetty-webapp" % "8.0.0.M3" % "jetty, compile"
+  // Dispatch
+  "net.databinder" %% "dispatch-http" % "0.8.6"
   )
 
 resolvers ++= Seq(
