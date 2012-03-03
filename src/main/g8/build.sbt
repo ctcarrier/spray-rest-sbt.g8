@@ -12,11 +12,6 @@ seq(assemblySettings: _*)
 
 seq(Revolver.settings: _*)
 
-javaOptions in Revolver.RE += "-Dakka.mode=dev"
-
-unmanagedResourceDirectories in Compile <+=
-    (baseDirectory) { _ / "src" / "main" / "webapp" }
-
 ivyXML :=
  	        <dependencies>
  	        	<exclude org="org.slf4j" module="slf4j-simple"/>

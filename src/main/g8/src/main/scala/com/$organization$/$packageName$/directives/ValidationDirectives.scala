@@ -37,7 +37,7 @@ trait ValidationDirectives extends Directives {
               case None => xs
             }
           }
-          Pass()
+          Pass
         }
         case _ => Reject(ValidationRejection("body.required"))
       }

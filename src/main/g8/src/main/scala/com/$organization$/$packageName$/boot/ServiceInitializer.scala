@@ -1,20 +1,15 @@
 package com.$organization$.$packageName$.boot
 
-import org.slf4j.LoggerFactory
-import akka.dispatch._
-import javax.servlet._
-import akka.util.AkkaLoader
-import akka.dispatch.Dispatchers
-import akka.actor.{Supervisor, Actor, Scheduler}
+import akka.actor.{Supervisor}
 import akka.config.Supervision
 import Supervision._
-import cc.spray.connectors.Initializer
 import akka.actor.Actor._
 import cc.spray.utils.ActorHelpers._
 import cc.spray.HttpService._
 import com.mongodb.ServerAddress
 import com.mongodb.casbah.{MongoDB, MongoConnection}
 import cc.spray.{HttpService, RootService}
+import cc.spray.utils.Logging
 import com.$organization$.$packageName$._
 import com.$organization$.$packageName$.dao._
 
@@ -23,7 +18,7 @@ import com.$organization$.$packageName$.dao._
  */
 
 
-class ServiceInitializer extends Initializer {
+object ServiceInitializer extends App with Logging {
   
   val logger = LoggerFactory.getLogger("com.$organization$.$resourceName$.boot.ServiceInitializer");
   logger.info("Running Initializer")
