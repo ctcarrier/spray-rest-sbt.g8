@@ -4,5 +4,5 @@
 
 2. Run Spray-can
 
-        ~re:start
+        ~re:start --- -Dakka.mode=dev
 
