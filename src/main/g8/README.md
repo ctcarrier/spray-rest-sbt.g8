@@ -2,7 +2,7 @@
 
         ./sbt
 
-2. Run Jetty
+2. Run Spray-can
 
-        jetty-run
+        ~re:start
 

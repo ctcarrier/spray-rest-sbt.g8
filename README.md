@@ -15,8 +15,7 @@ In a shell, run the following:
     g8 ctcarrier/spray-rest-sbt10.g8
     cd <name-of-app>
     sbt
-    > update
-    > jetty-run
+    > ~re:start
     
 You should be able to browse to a access a JSON body for your resource with 'curl -vv localhost:8080/$resourceName$'
 
