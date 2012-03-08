@@ -12,7 +12,7 @@ Install MongoDB - [Setup](http://www.mongodb.org) for more information.
 
 In a shell, run the following:
 
-    g8 ctcarrier/spray-rest-sbt10
+    g8 ctcarrier/spray-rest-sbt
     cd <name-of-app>
     sbt
     > ~re:start --- -Dakka.mode=dev
